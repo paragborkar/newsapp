@@ -1,20 +1,24 @@
-import CategoriesList from '@/components/CategoriesList'
 import Post from '@/components/Post'
-import Image from 'next/image';
 import { postsData } from '@/data'
+import Link from 'next/link'
+import React from 'react'
 
-export default function Home() {
+const Dashboard = () => {
   return (
-    <>
-    <CategoriesList/>
-    { postsData && postsData.length > 0 ? postsData.map(post =>(
+    <div>
+      <h1>My Posts</h1>
+      { postsData && postsData.length > 0 ? postsData.map(post =>(
       <Post key={post.id} id={post.id}  author={post.author}  authorEmail={"test@gmail.com"} 
       date={post.datepublished} thumbnail={post.thumbnail} category={post.category} 
       title={post.title} content={post.content}  links={post.links  || []}
       />
     ))   : (
-      <div className='py-6' >No Post To Display</div>
+      <div className='p-6 ' >No Post Created Yet. {" "}
+      <Link href={"/create-post"} className='underline' >Create New</Link>
+      </div>
     )}
-    </>
+    </div>
   )
 }
+
+export default Dashboard
