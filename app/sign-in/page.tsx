@@ -1,7 +1,17 @@
 import SignInBtns from '@/components/SignInBtns'
 import React from 'react'
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-const SignIn = () => {
+const SignIn = async () => {
+
+    const session = await getServerSession(authOptions);
+
+    if (session) {
+      redirect("/dashboard");
+    }
+
   return (
     <div>
       <SignInBtns/>
